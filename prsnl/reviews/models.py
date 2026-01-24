@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Game(models.Model):
+    # this shows the title, platform, and hours played on the home page
     title = models.CharField(max_length=200)
     platform = models.CharField(max_length=100, blank=True)
     hours_played = models.DecimalField(max_digits=6, decimal_places=1, default=0)
@@ -12,6 +13,7 @@ class Game(models.Model):
 
 
 class Review(models.Model):
+    #when i get it set up, this will show the game name, my rating, whether or not i have finished it, and the actual post itself
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="reviews")
     rating = models.PositiveSmallIntegerField()
     headline = models.CharField(max_length=200)
