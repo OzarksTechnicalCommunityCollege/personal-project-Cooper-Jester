@@ -13,7 +13,7 @@ class Game(models.Model):
 
 class Review(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="reviews")
-    rating = models.PositiveSmallIntegerField()  # 1-10, we'll validate in forms later
+    rating = models.PositiveSmallIntegerField()
     headline = models.CharField(max_length=200)
     body = models.TextField()
     finished = models.BooleanField(default=False)
