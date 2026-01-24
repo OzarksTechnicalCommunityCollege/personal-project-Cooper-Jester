@@ -1,0 +1,33 @@
+{% extends "reviews/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Reviews</title>
+    <link rel="stylesheet" href="{% static 'reviews/styles.css' %}">
+</head>
+<body>
+    {% block title %}{{ game.title }} - Reviews{% endblock %}
+
+    {% block content %}
+    <h2>{{ game.title }}</h2>
+    {% if game.platform %}<p><strong>Platform:</strong> {{ game.platform }}</p>{% endif %}
+    <p><strong>Hours:</strong> {{ game.hours_played }}</p>
+
+    <h3>Reviews</h3>
+    {% if reviews %}
+        {% for review in reviews %}
+        <article>
+            <h4>{{ review.headline }} — {{ review.rating }}/10</h4>
+            <p>{{ review.body }}</p>
+            {% if review.finished %}<p><em>Status: Finished</em></p>{% endif %}
+        </article>
+        {% endfor %}
+    {% else %}
+        <p>No reviews for this game yet.</p>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

@@ -1,25 +1,44 @@
+{% extends "reviews/base.html" %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Game Reviews</title>
+  <link rel="stylesheet" href="{% static 'reviews/styles.css' %}">
 </head>
 <body>
-  <h1>My Games</h1>
+  {% block title %}Home - Game Reviews{% endblock %}
 
-  {% if games %}
-    <ul>
-      {% for game in games %}
-        <li>
-          <strong>{{ game.title }}</strong>
-          {% if game.platform %} ({{ game.platform }}){% endif %}
-          — {{ game.hours_played }} hrs
-        </li>
+  {% block content %}
+    <h2>My Games</h2>
+
+    {% if games %}
+      <ul>
+        {% for game in games %}
+          <li>
+            <a href="{% url 'game_detail' game.id %}"><strong>{{ game.title }}</strong></a>
+            {% if game.platform %} ({{ game.platform }}){% endif %}
+            — {{ game.hours_played }} hrs
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No games yet.</p>
+    {% endif %}
+
+    <h2>Recent Reviews</h2>
+    {% if recent_reviews %}
+      {% for review in recent_reviews %}
+        <article>
+          <h3>{{ review.game.title }} — {{ review.headline }} ({{ review.rating }}/10)</h3>
+          <p>{{ review.body }}</p>
+        </article>
       {% endfor %}
-    </ul>
-  {% else %}
-    <p>No games yet. Add some in the admin.</p>
-  {% endif %}
+    {% else %}
+      <p>No reviews yet.</p>
+    {% endif %}
+  {% endblock %}
 </body>
 </html>
