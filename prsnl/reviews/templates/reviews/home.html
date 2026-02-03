@@ -6,6 +6,12 @@
   <title>Game Reviews</title>
 </head>
 <body>
+  <nav>
+    <form action="{% url 'search' %}" method="get" style="display:inline;">
+    <input type="text" name="q" placeholder="Search..." value="{{ q|default:'' }}">
+    <button type="submit">Go</button>
+    </form>
+  </nav>
   <h1>My Games</h1>
 
   {% if games %}

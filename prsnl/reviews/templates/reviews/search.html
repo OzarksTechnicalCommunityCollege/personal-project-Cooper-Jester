@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Reviews</title>
+</head>
+<body>
+    {% extends "reviews/home.html" %}
+
+    {% block title %}Search{% endblock %}
+
+    {% block content %}
+    <h2>Search</h2>
+
+    <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" value="{{ q }}" placeholder="Search games or reviews...">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if q %}
+        <h3>Games</h3>
+        {% if games %}
+        <ul>
+            {% for game in games %}
+            <li><a href="{% url 'game_detail' game.id %}">{{ game.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No matching games.</p>
+        {% endif %}
+
+        <h3>Reviews</h3>
+        {% if reviews %}
+        {% for review in reviews %}
+            <article>
+            <h4>{{ review.game.title }} — {{ review.headline }} ({{ review.rating }}/10)</h4>
+            <p>{{ review.body|truncatewords:40 }}</p>
+            </article>
+        {% endfor %}
+        {% else %}
+        <p>No matching reviews.</p>
+        {% endif %}
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

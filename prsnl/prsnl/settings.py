@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reviews'
+    'reviews',
 ]
 
 MIDDLEWARE = [
@@ -74,9 +74,13 @@ WSGI_APPLICATION = 'prsnl.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "game_reviews_db",
+        "USER": "postgres",
+        "PASSWORD": "postgres123",  # whatever you set during install
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
